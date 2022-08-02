@@ -19,7 +19,7 @@ public class User_RolesDAO implements User_RolesDAOInterface{
 				
 				//String that lays out the SQL query we want to run
 				//This String has a parameter for role_id, which we'll fill with our PreparedStatement
-				String sql = "select * from user_roles where reimb_status_id = ?;";
+				String sql = "select * from ers_user_roles where ers_users_role_id = ?;";
 				
 				//we need a PreparedStatment object to fill in the variable above with setInt().
 				PreparedStatement ps = conn.prepareStatement(sql);
@@ -27,7 +27,7 @@ public class User_RolesDAO implements User_RolesDAOInterface{
 				//insert a value for the variable in out SQL statement
 				ps.setInt(1, id); //1 == the first (and only) question mark, id == the parameter sent in to this method
 				
-				//The data returned from a SELECT statment is known as a ResultSet
+				//The data returned from a SELECT statement is known as a ResultSet
 				//We need a ResultSet OBJECT to hold our incoming data.
 				ResultSet rs = ps.executeQuery(); //execute the query into our new ResultSet
 				
@@ -40,8 +40,8 @@ public class User_RolesDAO implements User_RolesDAOInterface{
 					//we need to use the data in the ResultSet to fill a Role all-args constructor
 					//note we're getting data by calling each column name of our Role table 
 					User_Roles role = new User_Roles(
-							rs.getInt("reimb_status_id"),
-							rs.getString("reimb_status")
+							rs.getInt("ers_user_role_id"),
+							rs.getString("user_role")
 						); 
 					
 					return role; //return the Role data to the user!
@@ -60,25 +60,25 @@ public class User_RolesDAO implements User_RolesDAOInterface{
 		} //end of select by id method
 
 		@Override
-		public boolean updateUser_RolesStatus(int id, String status) {
+		public boolean updateUserRole(int id, String role) {
 			
 			try(Connection conn = ConnectionUtil.getConnection()){
 				
 				//SQL String for our UPDATE command
-				String sql = "update roles set user_role = ? where ers_user_role_id = ?;";
+				String sql = "update ers_user_roles set user_role = ? where ers_user_role_id = ?;";
 				
 				//create our PreparedStatement to fill in the variables
 				PreparedStatement ps = conn.prepareStatement(sql);
 				
 				//input the appropriate values into our PreparedStatement
-				ps.setString(1, status);
+				ps.setString(1, role);
 				ps.setInt(2, id);
 				
 				//execute the update!
 				ps.executeUpdate();
 				
 				//tell the console the update was successfully 
-				System.out.println(id + " has been updated to " + status);
+				System.out.println(id + " has been updated to " + role);
 				
 				//if it succeeds, return true
 				return true;

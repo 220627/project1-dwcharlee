@@ -16,4 +16,7 @@ public interface UsersDAOInterface {
 		//A method to delete user
 		public void deleteUser(int id);
 		
+		//a method that returns a Role object from the database given the Role's ID
+		public Users getUsersById(int id);
+		
 }

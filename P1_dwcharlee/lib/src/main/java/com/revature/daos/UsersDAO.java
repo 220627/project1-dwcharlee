@@ -146,4 +146,56 @@ public class UsersDAO implements UsersDAOInterface{
 				e.printStackTrace();
 			}	
 		}
+
+
+		@Override
+		public Users getUsersById(int id) {
+			//use a try-with-resources to open a DB connection object
+			try(Connection conn = ConnectionUtil.getConnection()){
+				
+				//String that lays out the SQL query we want to run
+				//This String has a parameter for role_id, which we'll fill with our PreparedStatement
+				String sql = "select * from ers_users where ers_users_id = ?;";
+				
+				//we need a PreparedStatment object to fill in the variable above with setInt().
+				PreparedStatement ps = conn.prepareStatement(sql);
+				
+				//insert a value for the variable in out SQL statement
+				ps.setInt(1, id); //1 == the first (and only) question mark, id == the parameter sent in to this method
+				
+				//The data returned from a SELECT statement is known as a ResultSet
+				//We need a ResultSet OBJECT to hold our incoming data.
+				ResultSet rs = ps.executeQuery(); //execute the query into our new ResultSet
+				
+				//the above code gets our data, and stores in a ResultSet object
+				//we have to ITERATE through our ResultSet to create a new Role object on the Java side (Java can't read SQL)
+				
+				//while there are records in the ResultSet...
+				while(rs.next()) {
+					
+					//we need to use the data in the ResultSet to fill a Role all-args constructor
+					//note we're getting data by calling each column name of our Role table 
+					Users user = new Users(
+							rs.getInt("ers_users_id"),
+							rs.getString("ers_username"),
+							rs.getString("ers_password"),
+							rs.getString("user_first_name"),
+							rs.getString("user_last_name"),
+							rs.getString("user_email"),
+							rs.getInt("user_role_id")
+						); 
+					
+					return user; //return the Role data to the user!
+					
+					//In this case, we know we're only going to get one role, so we can return from within the while loop
+					//If we were getting multiple records (like in get all employees), we would do it a little different.	
+				}
+				
+			} catch (SQLException e) {
+				System.out.println("Get Users failed"); //tell the console it failed
+				e.printStackTrace(); //print an error log for debugs
+			}
+			
+			return null;
+		}
 }

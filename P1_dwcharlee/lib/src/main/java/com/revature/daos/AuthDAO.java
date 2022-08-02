@@ -6,20 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.revature.models.User;
+import com.revature.models.Users;
 import com.revature.utils.ConnectionUtil;
 
 public class AuthDAO {
-
-	//I should've made an Interface but it's ok.
 	
-	//This DAO would likely have other methods like register user, or update user info
-	//but we just need a login for P0 and P1.
-	
-	public User login(String username, String password) {
+	public Users login(String username, String password) {
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			
-		String sql = "select * from users where username = ? and password = ?;";
+		String sql = "select ers_username, ers_password from ers_users where username = ? and password = ?;";
 			
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
@@ -29,13 +25,17 @@ public class AuthDAO {
 		ResultSet rs = ps.executeQuery();	
 		
 		System.out.println(rs);
-		//if anything gets returned at all, we know a user exists with that username/password pair. so we can return true
+
 		if(rs.next()) {
 		
-			User u = new User(
-						rs.getInt("user_id"),
-						rs.getString("username"),
-						rs.getString("password")
+			Users u = new Users(
+						rs.getInt("ers_users_id"),
+						rs.getString("ers_username"),
+						rs.getString("ers_password"),
+						rs.getString("user_first_name"),
+						rs.getString("user_last_name"),
+						rs.getString("user_email"),
+						rs.getInt("user_role_id")
 					);
 			return u;
 		}	
@@ -44,6 +44,5 @@ public class AuthDAO {
 			e.printStackTrace();
 		}
 		return null;		
-	}
-	
+	}	
 }

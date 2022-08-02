@@ -9,7 +9,10 @@ public class Reimbursement {
 	private int reimb_resolver;
 	private int reimb_status_id;
 	private int reimb_type_id;
-	
+	private Reimbursement reimb_author_fk;
+	private Reimbursement reimb_resolver_fk;
+	private Reimbursement reimb_status_id_fk;
+	private Reimbursement reimb_type_id_fk;
 	
 	public Reimbursement() {
 		super();
@@ -29,6 +32,18 @@ public class Reimbursement {
 		this.reimb_type_id = reimb_type_id;
 	}
 
+	public Reimbursement(int reimb_id, int reimb_amount, int reimb_submitted, Reimbursement reimb_author_fk,
+			Reimbursement reimb_resolver_fk, Reimbursement reimb_status_id_fk, Reimbursement reimb_type_id_fk) {
+		super();
+		this.reimb_id = reimb_id;
+		this.reimb_amount = reimb_amount;
+		this.reimb_submitted = reimb_submitted;
+		this.reimb_author_fk = reimb_author_fk;
+		this.reimb_resolver_fk = reimb_resolver_fk;
+		this.reimb_status_id_fk = reimb_status_id_fk;
+		this.reimb_type_id_fk = reimb_type_id_fk;
+	}
+
 
 	@Override
 	public String toString() {
@@ -36,7 +51,7 @@ public class Reimbursement {
 				+ reimb_submitted + ", reimb_author=" + reimb_author + ", reimb_resolver="
 				+ reimb_resolver + ", reimb_status_id=" + reimb_status_id + ", reimb_type_id=" + reimb_type_id + "]";
 	}
-
+	
 
 	public int getReimb_id() {
 		return reimb_id;
@@ -106,4 +121,46 @@ public class Reimbursement {
 	public void setReimb_type_id(int reimb_type_id) {
 		this.reimb_type_id = reimb_type_id;
 	}
+
+
+	public Reimbursement getReimb_author_fk() {
+		return reimb_author_fk;
+	}
+
+
+	public void setReimb_author_fk(Reimbursement reimb_author_fk) {
+		this.reimb_author_fk = reimb_author_fk;
+	}
+
+
+	public Reimbursement getReimb_resolver_fk() {
+		return reimb_resolver_fk;
+	}
+
+
+	public void setReimb_resolver_fk(Reimbursement reimb_resolver_fk) {
+		this.reimb_resolver_fk = reimb_resolver_fk;
+	}
+
+
+	public Reimbursement getReimb_status_id_fk() {
+		return reimb_status_id_fk;
+	}
+
+
+	public void setReimb_status_id_fk(Reimbursement reimb_status_id_fk) {
+		this.reimb_status_id_fk = reimb_status_id_fk;
+	}
+
+
+	public Reimbursement getReimb_type_id_fk() {
+		return reimb_type_id_fk;
+	}
+
+
+	public void setReimb_type_id_fk(Reimbursement reimb_type_id_fk) {
+		this.reimb_type_id_fk = reimb_type_id_fk;
+	}
+	
+	
 }

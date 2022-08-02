@@ -1,16 +1,16 @@
 package com.revature.models;
 
-public class Reimbursement_Status {
+public class Reimb_Status {
 
 	private int reimb_status_id;
 	private String reimb_status;
 	
-	public Reimbursement_Status() {
+	public Reimb_Status() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Reimbursement_Status(int reimb_status_id, String reimb_status) {
+	public Reimb_Status(int reimb_status_id, String reimb_status) {
 		super();
 		this.reimb_status_id = reimb_status_id;
 		this.reimb_status = reimb_status;
