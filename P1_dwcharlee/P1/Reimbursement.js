@@ -1,12 +1,10 @@
 const url = "http://localhost:3000";
 
-document.getElementById("getEmployeeButton").onclick = getEmployees;
+document.getElementById("getUsersButton").onclick = getEmployees;
 
-async function getEmployees(){
+async function getUserss(){
 
-    let response = await fetch(url + "/employees")
-    let user = await fetch(url + "/users");
-    let 
+    let response = await fetch(url + "/users")
     
     console.log(response)
 
@@ -14,18 +12,18 @@ async function getEmployees(){
 
         let data = await reponse.json;
 
-        for(let employee of data){
+        for(let users of data){
 
             let row = document.createElement("tr");
             let cell = document.createElement("td");        
-            cell.innerHTML = employee.employee_id;
+            cell.innerHTML = users.ers_users_id;
             row.appendChild(cell);
-            cell.innerHTML = employee.first_name;
+            cell.innerHTML = users.ers_username;
             row.appendChild(cell);
-            cell.innerHTML = employee.last_name;
+            cell.innerHTML = users.ers_password;
             row.appendChild(cell);
 
-            document.getElementById("employeeBody").appendChild("row");
+            document.getElementById("usersBody").appendChild("row");
         }
     } else {
         alert("Something went wrong! Make sure your Java is running!");

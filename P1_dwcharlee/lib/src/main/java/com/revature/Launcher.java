@@ -21,18 +21,9 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		
-		//****These aren't being used anymore, DAO methods are now called in the Controller layer
-		//Instantiate an EmployeeDAO and RoleDAO so we can use their methods
-		EmployeeDAO eDAO = new EmployeeDAO();
-		RoleDAO rDAO = new RoleDAO();
-		
-		
 		System.out.println("========Welcome to the Krusty Krab Employee Management System========");
 		
-		//this is a try-with-resources block. it will test whether our Connection works.
-		//try-with-resources works by trying to open a certain resource (Connection in this case)
-		//and catch an exception if the resource fails to open. 
-		//So in this case, if we fail to open a connection, it will throw an exception
+		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			System.out.println("CONNECTION SUCCESSFUL :)");
 		} catch (SQLException e) {
@@ -56,7 +47,7 @@ public class Launcher {
 		//Javalin endpoint handlers are like a traffic cop to your Java server. They take HTTP traffic and direct it.
 		
 		//Instantiate an EmployeeController so that we can use its handlers
-		EmployeeController ec = new EmployeeController();
+		ReimbursementController ec = new ReimbursementController();
 		
 		//Instantiate a RoleController so that we can use its handler
 		RoleController rc = new RoleController();
