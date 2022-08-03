@@ -47,7 +47,7 @@ public class ReimbursementController {
 			
 			
 			//This Handler will get the HTTP POST Request for inserting employees, then send the employee data to the DB.
-			public Handler insertUsersHandler = (ctx) -> {
+			public Handler insertReimbHandler = (ctx) -> {
 				
 				//With POST requests, we have some data coming in, which we access with ctx.body();
 				//body?? it refers to the BODY of the HTTP Request (which is where the incoming data is found)
@@ -56,9 +56,9 @@ public class ReimbursementController {
 				//create a new GSON object to make JSON <-> Java conversions
 				Gson gson = new Gson();
 				
-				Users newUsers = gson.fromJson(body,  Users.class);
+				Reimbursement newReimb = gson.fromJson(body,  Reimbursement.class);
 						
-				if(eDAO.insertUsers(newUsers)) {
+				if(rDAO.insertReimbursement(newReimb)) {
 					ctx.status(202);
 					
 				} else {
@@ -67,13 +67,13 @@ public class ReimbursementController {
 				
 			};
 			
-			public Handler deleteUsersHandler = (ctx) -> {
+			public Handler deleteReimbHandler = (ctx) -> {
 				
 				int youreFired = Integer.valueOf(ctx.pathParam("id"));
 				
-				eDAO.deleteUser(youreFired);
+				rDAO.deleteReimbursement(youreFired);
 				
-				ctx.result("User " + youreFired + " terminated");
+				ctx.result("Reimb " + youreFired + " Voided");
 				ctx.status(200);
 			};
 }
